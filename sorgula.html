@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="ip sorgu, ip sorgulama, ip sorgula, ip öğrenme, ip bul, ip no, ip adresi sorgulama, ip no sorgulama, ip numaram, ip adresi,ip adresim nedir,ip adresim, ip adresiniz" />
+    <meta name="description" content="IP sorgulama ile kendi IP adresinizi veya herhangi bir IP adresini sorgulayarak sonuçları görebilirsiniz." />
+    <link rel="stylesheet" href="style.css">
+    <title>IP Sorgula - IP Adresi Sorgulama</title>
+</head>
+<body>
+    <header class="head">
+        <h1><a href="ipsorgula.info">ipsorgula<span>.info<sup>®</sup></span></a></h1>
+    </header>
+
+<div class="logo"><h2>IP Sorgulama - IP Adresi Öğrenme</h2></div>
+
+    <div class="container">
+
+    <div class="section">
+        <h3>Kendi IP Adresinizi Öğrenin</h3>
+        <button onclick="getIpAddress()">IP Adresini Göster</button>
+        <div id="myip"></div>
+    </div>
+
+<div class="section" id="section-2">
+    <h3>Sorgulamak İstediğiniz Diğer IP Adresleri</h3>
+        <input type="text" id="ipInput" placeholder="Sorgulamak İstediğiniz IP Adresini Yazın...">
+        <button onclick="searchIp()" id="btn-2">Sorgula</button>
+    <div id="ipdetails"></div>
+</div>
+    </div>
+    <footer>
+        <p>Bu web sitesi <a href="https://www.ipsorgula.info" class="link">ipsorgula.info</a> tarafından hazırlanmıştır. Tüm hakları saklıdır.</p> 
+        <p> 2024 <a href="https://www.ipsorgula.info" class="link">ipsorgula.info</a></p>
+        <p>Telif hakkı saklıdır.</p>
+    </footer>
+    <script>
+        // Geçerli IP adresi kontrolü
+        function isValidIP(ip) {
+            const ipPattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){2}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+            return ipPattern.test(ip);
+        }
+    
+        // Kullanıcının IP adresini gösteren fonksiyon
+        function getIpAddress() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('myip').innerText = `IP Adresiniz: ${data.ip}`;
+                })
+                .catch(error => {
+                    showError("IP adresi alınamadı. Lütfen tekrar deneyin.");
+                    console.error('Hata:', error);
+                });
+        }
+    
+        // IP sorgulama
+        function searchIp() {
+            const ipInput = document.getElementById('ipInput');
+            const ipDetailsElement = document.getElementById('ipdetails');
+            const ip = ipInput.value.trim();
+    
+            // Geçerli IP kontrolü
+            if (!isValidIP(ip)) {
+                showError("Lütfen geçerli bir IP adresi girin.");
+                return;
+            }
+    
+            // Yükleme durumu
+            ipDetailsElement.innerHTML = "<p>Yükleniyor...</p>";
+    
+            const apiUrl = `https://ipwhois.app/json/${ip}`;
+    
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('IP adresi bulunamadı.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayIpDetails(data);
+                })
+                .catch(error => {
+                    showError("Bilgiler alınamadı. Lütfen tekrar deneyin.");
+                    console.error('Hata:', error);
+                });
+        }
+    
+        // IP bilgilerini ekrana yazdırma
+        function displayIpDetails(data) {
+            const ipDetailsElement = document.getElementById('ipdetails');
+            if (data.success === false) {
+                showError("Geçersiz IP adresi. Lütfen tekrar deneyin.");
+                return;
+            }
+    
+            ipDetailsElement.innerHTML = `
+                <p><strong>IP Adresi:</strong> ${data.ip || 'Bilinmiyor'}</p>
+                <p><strong>Ülke:</strong> ${data.country || 'Bilinmiyor'}</p>
+                <p><strong>Şehir:</strong> ${data.city || 'Bilinmiyor'}</p>
+                <p><strong>Enlem:</strong> ${data.latitude || 'Bilinmiyor'}</p>
+                <p><strong>Boylam:</strong> ${data.longitude || 'Bilinmiyor'}</p>
+                <p><strong>İnternet Servis Sağlayıcı:</strong> ${data.isp || 'Bilinmiyor'}</p>
+            `;
+        }
+    
+        // Hata mesajı gösterme
+        function showError(message) {
+            document.getElementById('ipdetails').innerHTML = `<p style="color: red;">${message}</p>`;
+        }
+    </script>
+    
+</body>
+</html>

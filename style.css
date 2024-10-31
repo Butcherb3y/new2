@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Exo 2", serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    background-color: #f7f7f7;
+    height: 150vh;
+}
+
+.head {
+    text-align: center;
+    padding: 45px;
+    font-size: 35px;
+}
+
+.head h1 a {
+    color: black;
+}
+
+.head h1 span {
+    color: #2680CA;
+}
+
+.head h1 sup {
+    color: black;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.logo h2 {
+    background-color: #2680CA;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    font-size: 40px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.container {
+    color: black;
+    background-color: #f7f7f7;
+    width: 50%;
+    height: 800px;
+    margin-top: 50px;
+    margin-left: 25%;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.section {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 25px;
+}
+
+.section button {
+    color: white;
+    background-color: #2680CA;
+    border: none;
+    padding: 10px 10px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.section button:hover {
+    opacity: 0.7;
+}
+
+#section-2 {
+    margin-top: 150px;
+}
+
+#myip {
+    width: 40%;
+    margin-left: 30%;
+}
+
+#myip, #ipdetails {
+    background-color: #2680CA;
+    font-size: 25px;
+    color: white;
+    margin-top: 25px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+input {
+    width: 85%;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    font-size: 20px;
+    margin-right: 20px;
+    margin-top: 5%;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 250px;
+    background-color: #2680CA;
+    height: 70px;
+}
+
+footer .link {
+    text-decoration: underline;
+}
+
+footer p, .link {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 21px;
+}
+
+/* Medya sorguları */
+@media (max-width: 1200px) {
+    .head {
+        padding: 35px;
+        font-size: 32px;
+    }
+
+    .logo h2 {
+        font-size: 36px;
+        height: 80px;
+    }
+
+    .section {
+        font-size: 28px;
+    }
+
+    .section button {
+        font-size: 24px;
+        padding: 10px 15px;
+    }
+
+    input {
+        font-size: 18px;
+    }
+
+    footer p {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .head {
+        padding: 30px;
+        font-size: 28px;
+    }
+
+    .logo h2 {
+        font-size: 30px;
+        height: 70px;
+    }
+
+    .section {
+        font-size: 24px;
+    }
+
+    .section button {
+        font-size: 20px;
+        padding: 10px;
+    }
+
+    input {
+        font-size: 18px;
+    }
+
+    footer p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .head {
+        padding: 20px;
+        font-size: 24px;
+    }
+
+    .logo h2 {
+        font-size: 24px;
+        height: 60px;
+    }
+
+    .section {
+        font-size: 20px;
+    }
+
+    .section button {
+        font-size: 18px;
+        padding: 8px;
+    }
+
+    input {
+        font-size: 16px;
+    }
+
+    footer p {
+        font-size: 16px;
+    }
+}
